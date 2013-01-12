@@ -2,6 +2,7 @@ package
 {
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
+	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.FP;
@@ -19,6 +20,9 @@ package
 		private const MovementScale_:Number = 500;
 		private var MovementNumber_:Number;
 		
+		private var PaddleColor_:uint;
+		private var PaddleImage_:Image;
+		
 		public function Paddle(Player:int = 0) 
 		{
 			PlayerNumber_ = Player;
@@ -32,7 +36,25 @@ package
 				DownKey_ = Key.S;
 			}
 			
+			PaddleImage_ = new Image(Assets.ImageDictionary["Player1.png"]);
+			PaddleColor_ = 0xfffefefe;
+			PaddleImage_.color = PaddleColor_;
+			
+			
+			
 			MovementNumber_ = 0;
+		}
+		
+		public function GetColor():uint
+		{
+			return PaddleColor_;
+		}
+		
+		public function SetColor(color:uint):void
+		{
+			PaddleColor_ = color;
+			PaddleImage_.color = PaddleColor_;
+			graphic = PaddleImage_;
 		}
 		
 		public function updatePosition():void 
@@ -56,29 +78,6 @@ package
 		{
 			updatePosition();
 			super.update();
-		}
-		
-		public function CorrectForBallCollisionOnMove():void
-		{
-			var TheBalls:Array = new Array();
-			
-			var StartX:int = originX;
-			var StartY:int = originY;
-			var EndX:int = StartX + width;
-			var EndY:int = StartY + height;
-						
-			// Get all balls collided with
-			collideInto("ball", x, y, TheBalls);
-			
-			// Loop over the balls, correcting their position
-			//for each( var currentBall:Ball in TheBalls) {
-				//
-				// check for collision in x direction
-				//if (
-					//
-				//) {
-				//}
-			//}
 		}
 	}
 

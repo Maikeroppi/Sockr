@@ -14,7 +14,7 @@ import net.flashpunk.FP;
 		{
 			super(640, 480, 60, false);
 			FP.screen.scale = 1;
-			//FP.console.enable();
+		//	FP.console.enable();
 		}
 		
 		override public function init():void 

@@ -36,11 +36,22 @@ package
 			, "Tiles.png":Assets.Tiles
 			, "Ball.png":Assets.BallImage
 		};
+		
+		public static const kNeonColors:Array = new Array(
+			0xfffefefe
+			, 0xffff0099
+			, 0xfff3f315
+			, 0xff83f52c
+			, 0xffff6600
+			, 0xff6e0dd0
+			, 0xff366cd4
+		);
 			
 		// Set screen size
 		public static const kScreenWidth:int = 640;
 		public static const kScreenHeight:int = 480;
-		public static const kBackgroundcolor:uint = 0xFF008040;
+		//public static const kBackgroundcolor:uint = 0xFF008040;
+		public static const kBackgroundcolor:uint = 0xFF000000;
 		
 		// Set tile parameters
 		public static const kTileWidth:int = 16;

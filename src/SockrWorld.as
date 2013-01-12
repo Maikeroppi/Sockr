@@ -114,14 +114,16 @@ package
 					EntityMap["Player1"] = Player1Entity_;
 					ImageVal = new Image(Assets.Player1Image);
 					Player1Entity_.graphic = ImageVal;
+					//Player1Entity_.setHitbox(ImageVal.width, ImageVal.height, 0, 0);
 					Player1Entity_.setHitbox(ImageVal.width, ImageVal.height,0,0);
 					break;
 				case "Player2":
 					Player2Entity_ = new Paddle(2);
 					EntityMap["Player2"] = Player2Entity_;
-					ImageVal = new Image(Assets.Player2Image);
+					ImageVal = new Image(Assets.Player1Image);
 					Player2Entity_.graphic = ImageVal;
-					Player2Entity_.setHitbox(ImageVal.width, ImageVal.height, 0, 0);
+					//Player2Entity_.setHitbox(ImageVal.width, ImageVal.height, 0, 0);
+					Player2Entity_.setHitbox(ImageVal.width, ImageVal.height,0,0);
 					break;
 					
 				case "Ball":

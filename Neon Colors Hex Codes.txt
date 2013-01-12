@@ -1,0 +1,9 @@
+Neon Colors:
+
+fefefe - Off white
+ff0099 - Pink
+f3f315 - Yellow
+83f52c - Green
+ff6600 - Orange
+6e0dd0 - Purple
+366cd4 - Blue

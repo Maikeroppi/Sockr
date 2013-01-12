@@ -1,6 +1,8 @@
 package  
 {
 	import flash.utils.ByteArray;
+	import flash.utils.describeType;
+	
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Tilemap;
 	import net.flashpunk.masks.Grid;
@@ -62,6 +64,27 @@ package
 			// Setup grid
 			Grid_.loadFromString(LevelData.Solids[0], "", "\n");
 		}
+		
+		/*
+		 * Sets tile index the pixel is on. 
+		 * @param Xpixel X coordinate in pixel space.
+		 * @param Ypixel Y coordinate in pixel space.
+		 * @param tile The tile index to change the tile to.
+		 */
+		public function SetTileColor(Xpixel:int, YPixel:int, tile:int):void
+		{
+			var TileX:uint = Xpixel / Assets.kTileWidth;
+			var TileY:uint = YPixel / Assets.kTileHeight;
+			
+			if(Grid_.getTile(TileX, TileY) ) {
+				Tiles_.setTile(
+					TileX,
+					TileY,
+					tile
+					);
+			}
+		}
+		
 		public function clearGrid():void
 		{
 			Grid_.clearRect(0, 0, LevelWidthInTiles_, LevelHeightInTiles_);
