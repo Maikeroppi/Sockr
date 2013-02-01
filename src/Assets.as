@@ -30,6 +30,9 @@ package
 		[Embed(source = "../Ball.png")]
 		public static const BallImage:Class;
 		
+		[Embed(source="../SockrStart.png")]
+		public static const StartScreen:Class;
+		
 		public static var ImageDictionary:Object = {
 			"Player1.png":Assets.Player1Image
 			, "Player2.png":Assets.Player2Image

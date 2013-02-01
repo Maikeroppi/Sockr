@@ -21,7 +21,7 @@ import net.flashpunk.FP;
 		{
 			trace("FlashPunk has started successfully!");
 
-			FP.world = new SockrWorld();
+			FP.world = new ScreenWorld(Assets.StartScreen, ScreenWorld.StartScreen);
 			FP.screen.color = Assets.kBackgroundcolor;
 			
 			super.init();

@@ -42,6 +42,13 @@ package
 		private var Player1ScoreEntity_:Entity;
 		private var Player2ScoreEntity_:Entity;
 		
+		private static const WinScore_:uint = 20;
+		private var GameOver_:Boolean;
+		
+		// Text stuff for winning the game
+		private var WinText_:Text;
+		private var WinTextEntity_:Entity;
+		
 		// Variable for holding the entities in Birthday.oep
 		public static var EntityMap:Dictionary = new Dictionary;
 
@@ -76,6 +83,15 @@ package
 			
 			Player1ScoreEntity_ = new Entity(200, 50, Player1ScoreText_);
 			Player2ScoreEntity_ = new Entity(400, 50, Player2ScoreText_);
+			
+			WinText_ = new Text("", 0, 0);
+			WinText_.color = 0xffffffff;
+			WinText_.size = 40;
+			
+			WinTextEntity_ = new Entity( (Assets.kScreenWidth/2) - (Assets.kScreenWidth * 0.15), (Assets.kScreenHeight/2) - (Assets.kScreenHeight * 0.1), WinText_);
+			
+			
+			GameOver_ = false;
 
 			addTween(AddBallTween_, false);
 		}
@@ -151,28 +167,47 @@ package
 		}
 		
 		override public function update():void
-		{		
-			super.update();
-			
-			var Goal1Balls:Array = new Array();
-			var Goal2Balls:Array = new Array();
-			var aBall:Entity;
-			
-			Goal1_.collideInto("ball", Goal1_.x, Goal1_.y, Goal1Balls);
-			for each(aBall in Goal1Balls) {
-				Player2Score_ += 1;
-				remove(aBall);
+		{	
+			if(GameOver_ == false) {
+				super.update();
+				
+				var Goal1Balls:Array = new Array();
+				var Goal2Balls:Array = new Array();
+				var aBall:Entity;
+								
+				Goal1_.collideInto("ball", Goal1_.x, Goal1_.y, Goal1Balls);
+				for each(aBall in Goal1Balls) {
+					Player2Score_ += 1;
+					remove(aBall);
+				}
+				
+				Player2ScoreText_.text = Player2Score_.toString();
+				
+				Goal2_.collideInto("ball", Goal2_.x, Goal2_.y, Goal2Balls);
+				for each(aBall in Goal2Balls) {
+					Player1Score_ += 1;
+					remove(aBall);
+				}
+				
+				Player1ScoreText_.text = Player1Score_.toString();
+				
+				if (Player1Score_ >= WinScore_ || Player2Score_ >= WinScore_) {
+					GameOver_ = true;
+					
+					// Set text
+					var winner:String = "";
+					if (Player1Score_ >= WinScore_) {
+						winner = "P1";
+					} else {
+						winner = "P2";
+					}
+					
+					WinText_.text = winner + " Wins!";
+					add(WinTextEntity_);
+					
+					AddBallTween_.cancel();					
+				}
 			}
-			
-			Player2ScoreText_.text = Player2Score_.toString();
-			
-			Goal2_.collideInto("ball", Goal2_.x, Goal2_.y, Goal2Balls);
-			for each(aBall in Goal2Balls) {
-				Player1Score_ += 1;
-				remove(aBall);
-			}
-			
-			Player1ScoreText_.text = Player1Score_.toString();
 		}
 		
 		public function changeLevel(levelData:Class):void 
